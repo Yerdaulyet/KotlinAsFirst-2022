@@ -2,6 +2,7 @@
 
 package lesson1.task1
 
+import java.util.*
 import kotlin.math.*
 
 // Урок 1: простые функции
@@ -129,4 +130,13 @@ fun accountInThreeYears(initial: Int, percent: Int): Double = initial * (1.0 + p
  * Пользователь задает целое трехзначное число (например, 478).
  * Необходимо вывести число, полученное из заданного перестановкой цифр в обратном порядке (например, 874).
  */
-fun numberRevert(number: Int): Int = TODO()
+fun numberRevert(number: Int): (Array<String>) -> Unit = fun( args: Array<String>){
+    System.out.print("enter the number:")
+    val scan = Scanner(System.`in`)
+    var strNum:String=scan.next()
+    while (strNum.length !=3){
+        println("Not a 3 digit number!\n Try again:")
+        strNum=scan.next()
+    }
+    System.out.printf("introduced=>%s;%nReverse=>%s.",strNum,StringBuilder(strNum).reverse().toString())
+}
