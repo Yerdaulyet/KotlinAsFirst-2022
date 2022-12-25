@@ -1,9 +1,8 @@
-@file:Suppress("UNUSED_PARAMETER")
-
 package lesson1.task1
 
-import java.util.*
-import kotlin.math.*
+import kotlin.math.PI
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 // Урок 1: простые функции
 // Максимальное количество баллов = 5
@@ -130,13 +129,5 @@ fun accountInThreeYears(initial: Int, percent: Int): Double = initial * (1.0 + p
  * Пользователь задает целое трехзначное число (например, 478).
  * Необходимо вывести число, полученное из заданного перестановкой цифр в обратном порядке (например, 874).
  */
-fun numberRevert(number: Int): (Array<String>) -> Unit = fun( args: Array<String>){
-    System.out.print("enter the number:")
-    val scan = Scanner(System.`in`)
-    var strNum:String=scan.next()
-    while (strNum.length !=3){
-        println("Not a 3 digit number!\n Try again:")
-        strNum=scan.next()
-    }
-    System.out.printf("introduced=>%s;%nReverse=>%s.",strNum,StringBuilder(strNum).reverse().toString())
-}
+fun numberRevert(number: Int):
+        Int = (number % 10) * 100 + ((number / 10) % 10) * 10 + (number / 100)
