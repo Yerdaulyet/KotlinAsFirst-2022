@@ -110,7 +110,20 @@ fun whichRookThreatens(
     kingX: Int, kingY: Int,
     rookX1: Int, rookY1: Int,
     rookX2: Int, rookY2: Int
-): Int = TODO()
+): Int {
+    var win1 = false
+    var win2 = false
+    if (kingY == rookY1 || kingX == rookX1)
+        win1 = true
+    if (kingY == rookY2 || kingX == rookX2)
+        win2 = true
+    return when {
+        !win1 && !win2 -> 0
+        win1 && win2 -> 3
+        win2 -> 2
+        else -> 1
+    }
+}
 
 /**
  * Простая (2 балла)
@@ -126,7 +139,20 @@ fun rookOrBishopThreatens(
     kingX: Int, kingY: Int,
     rookX: Int, rookY: Int,
     bishopX: Int, bishopY: Int
-): Int = TODO()
+): Int {
+    var win1 = false
+    var win2 = false
+    if (kingX == rookX || kingY == rookY)
+        win1 = true
+    if ((bishopX - bishopY == kingX - kingY) || (bishopX + bishopY == kingX + kingY))
+        win2 = true
+    return when {
+        !win1 && !win2 -> 0
+        win1 && win2 -> 3
+        win2 -> 2
+        else -> 1
+    }
+}
 
 /**
  * Простая (2 балла)
