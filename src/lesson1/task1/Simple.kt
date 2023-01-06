@@ -105,7 +105,7 @@ fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double) =
  * Определить третью цифру справа в этом числе (в данном случае 8).
  */
 fun thirdDigit(number: Int): Int =
-    (number / 100 ) % 10
+    (number / 100) % 10
 
 /**
  * Простая (2 балла)
