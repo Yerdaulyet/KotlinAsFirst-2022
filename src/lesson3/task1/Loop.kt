@@ -2,6 +2,9 @@
 
 package lesson3.task1
 
+import kotlin.math.abs
+import kotlin.math.ceil
+import kotlin.math.pow
 import kotlin.math.sqrt
 
 // Урок 3: циклы
@@ -17,7 +20,7 @@ import kotlin.math.sqrt
 fun factorial(n: Int): Double {
     var result = 1.0
     for (i in 1..n) {
-        result = result * i // Please do not fix in master
+        result *= i // Please do not fix in master
     }
     return result
 }
@@ -74,11 +77,11 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  */
 fun digitNumber(n: Int): Int {
     var counter = 0
-    var numb = Math.abs(n)
+    var numb = abs(n)
     do {
         numb /= 10
         counter++
-    } while (numb !=0)
+    } while (numb != 0)
     return counter
 }
 
@@ -89,8 +92,7 @@ fun digitNumber(n: Int): Int {
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
 fun fib(n: Int): Int =
-    (Math.pow(((Math.sqrt(5.0) + 1) / 2),
-        n.toDouble()) / Math.sqrt (5.0) + 0.5).toInt()
+    (((((sqrt(5.0) + 1) / 2).pow(n.toDouble()) / sqrt(5.0)) + 0.5)).toInt()
 
 /**
  * Простая (2 балла)
@@ -98,7 +100,7 @@ fun fib(n: Int): Int =
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    for (miniDivisor in 2..Math.ceil(Math.sqrt(n.toDouble())).toInt())
+    for (miniDivisor in 2..ceil(sqrt(n.toDouble())).toInt())
     {
         if (n % miniDivisor == 0)
             return miniDivisor
@@ -137,7 +139,16 @@ fun collatzSteps(x: Int): Int = TODO()
  * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
  * минимальное число k, которое делится и на m и на n без остатка
  */
-fun lcm(m: Int, n: Int): Int = TODO()
+fun lcm(m: Int, n: Int): Int {
+    var numb1 = m
+    var numb2 = n
+    while (numb1 != numb2)
+        if (numb1 > numb2)
+            numb1 -= numb2
+        else
+            numb2 -= numb1
+    return n * m / numb1
+}
 
 /**
  * Средняя (3 балла)
@@ -146,7 +157,20 @@ fun lcm(m: Int, n: Int): Int = TODO()
  * Взаимно простые числа не имеют общих делителей, кроме 1.
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
-fun isCoPrime(m: Int, n: Int): Boolean = TODO()
+fun isCoPrime(m: Int, n: Int): Boolean {
+    var m1 = m
+    var n1 = n
+    while (m1 != n1) {
+        if (m1 > n1) {
+            m1 -= n1
+        }
+        if (m1 < n1) {
+            n1 -= m1
+        }
+    }
+    val x = n1 == 1
+    return x
+}
 
 /**
  * Средняя (3 балла)
@@ -155,7 +179,15 @@ fun isCoPrime(m: Int, n: Int): Boolean = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun revert(n: Int): Int = TODO()
+fun revert(n: Int): Int {
+    var revers = 0
+    var numb = n
+    while (numb >= 1) {
+        revers = revers * 10 + (numb % 10)
+        numb /= 10
+    }
+    return revers
+}
 
 /**
  * Средняя (3 балла)
@@ -166,7 +198,8 @@ fun revert(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun isPalindrome(n: Int): Boolean = TODO()
+fun isPalindrome(n: Int): Boolean =
+    revert(n) == n
 
 /**
  * Средняя (3 балла)
