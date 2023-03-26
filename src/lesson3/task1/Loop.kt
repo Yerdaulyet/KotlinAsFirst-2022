@@ -2,6 +2,8 @@
 
 package lesson3.task1
 
+import kotlinx.html.MATH
+import java.lang.Math.pow
 import kotlin.math.abs
 import kotlin.math.ceil
 import kotlin.math.pow
@@ -100,8 +102,7 @@ fun fib(n: Int): Int =
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    for (miniDivisor in 2..ceil(sqrt(n.toDouble())).toInt())
-    {
+    for (miniDivisor in 2..ceil(sqrt(n.toDouble())).toInt()) {
         if (n % miniDivisor == 0)
             return miniDivisor
     }
@@ -209,7 +210,7 @@ fun isPalindrome(n: Int): Boolean =
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun hasDifferentDigits(n: Int): Boolean = TODO()
+fun hasDifferentDigits(n: Int): Boolean = digitCountInNumber(n, n % 10) != "$n".length
 
 /**
  * Средняя (4 балла)
@@ -220,7 +221,18 @@ fun hasDifferentDigits(n: Int): Boolean = TODO()
  * Подумайте, как добиться более быстрой сходимости ряда при больших значениях x.
  * Использовать kotlin.math.sin и другие стандартные реализации функции синуса в этой задаче запрещается.
  */
-fun sin(x: Double, eps: Double): Double = TODO()
+fun sin(x: Double, eps: Double): Double {
+    var counter = 1
+    var sin = x % (2 * Math.PI)
+    val sinConst = sin
+    var equation = sin
+    while (Math.abs(equation) >= eps) {
+        equation = -equation * sinConst / ((counter * 2 + 1) * (counter * 2)).toDouble() * sinConst
+        counter += 1
+        sin += equation
+    }
+    return sin
+}
 
 /**
  * Средняя (4 балла)
@@ -231,7 +243,18 @@ fun sin(x: Double, eps: Double): Double = TODO()
  * Подумайте, как добиться более быстрой сходимости ряда при больших значениях x.
  * Использовать kotlin.math.cos и другие стандартные реализации функции косинуса в этой задаче запрещается.
  */
-fun cos(x: Double, eps: Double): Double = TODO()
+fun cos(x: Double, eps: Double): Double {
+    var equation = 1.0
+    var counter = 1
+    var cos = 1.0
+    val constX = x % (2 * Math.PI)
+    while (Math.abs(equation) >= eps) {
+        equation = -equation * constX / ((counter * 2 - 1) * (counter * 2)).toDouble() * constX
+        counter += 1
+        cos += equation
+    }
+    return cos
+}
 
 /**
  * Сложная (4 балла)
@@ -242,7 +265,27 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
+fun squareSequenceDigit(n: Int): Int {
+    var x = 1
+    var m = 1
+    var t: Int
+    var l = n
+    var count = 1
+    while (l > 0) {
+        m = x * x
+        t = m
+        while (t >= 10) {
+            count++
+            t /= 10
+        }
+        l -= count
+        count = 1
+        x++
+    }
+    l = Math.abs(l)
+    m = m / pow(10.0, l * 1.0).toInt() % 10
+    return m
+}
 
 /**
  * Сложная (5 баллов)
@@ -253,4 +296,24 @@ fun squareSequenceDigit(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int = TODO()
+fun fibSequenceDigit(n: Int): Int {
+    var x = 1.0
+    var m = 1
+    var t: Int
+    var l = n
+    var count = 1
+    while (l > 0) {
+        m = ((Math.sqrt(5.0) / 5) * (pow((1 + Math.sqrt(5.0)) / 2, x) - pow((1 - Math.sqrt(5.0)) / 2, x))).toInt()
+        t = m
+        while (t >= 10) {
+            count++
+            t /= 10
+        }
+        l -= count
+        count = 1
+        x++
+    }
+    l = Math.abs(l)
+    m = m / pow(10.0, l * 1.0).toInt() % 10
+    return m
+}
