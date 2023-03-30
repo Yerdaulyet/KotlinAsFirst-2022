@@ -158,7 +158,8 @@ fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>) {
  * В выходном списке не должно быть повторяющихся элементов,
  * т. е. whoAreInBoth(listOf("Марат", "Семён, "Марат"), listOf("Марат", "Марат")) == listOf("Марат")
  */
-fun whoAreInBoth(a: List<String>, b: List<String>): List<String> = TODO()
+fun whoAreInBoth(a: List<String>, b: List<String>): List<String> =
+    ((a.toSet()).intersect(b.toSet())).toList()
 
 /**
  * Средняя (3 балла)
@@ -248,6 +249,7 @@ fun extractRepeats(list: List<String>): Map<String, Int> {
         m[list[i]] = list.count { it == list[i] }
     return m.filterValues { it > 1 }
 }
+
 /**
  * Средняя (3 балла)
  *
