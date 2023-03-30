@@ -124,7 +124,7 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
 fun abs(v: List<Double>): Double =
     when {
         v.isEmpty() -> 0.0
-        else -> Math.sqrt(v.map{ it * it }.sum())
+        else -> sqrt(v.sumOf { it * it })
     }
 
 /**
@@ -151,7 +151,7 @@ fun center(list: MutableList<Double>): MutableList<Double> =
         list.isEmpty() -> list
         else -> {
             val average = mean(list)
-            for (elCount in 0 until list.size){
+            for (elCount in 0 until list.size) {
                 list[elCount] -= average
             }
             list
@@ -238,7 +238,7 @@ fun factorize(n: Int): List<Int> {
  * Множители в результирующей строке должны располагаться по возрастанию.
  */
 fun factorizeToString(n: Int): String =
-    factorize(n). joinToString(separator = "*")
+    factorize(n).joinToString(separator = "*")
 
 /**
  * Средняя (3 балла)
@@ -289,7 +289,7 @@ fun decimal(digits: List<Int>, base: Int): Int {
     var n = 0
     val list = digits.reversed()
     for (elCount in digits.indices)
-        n +=list[elCount] * base.toDouble().pow(elCount.toDouble()).toInt()
+        n += list[elCount] * base.toDouble().pow(elCount.toDouble()).toInt()
     return n
 }
 

@@ -1,9 +1,5 @@
-@file:Suppress("UNUSED_PARAMETER")
-
 package lesson3.task1
 
-import kotlinx.html.MATH
-import java.lang.Math.pow
 import kotlin.math.abs
 import kotlin.math.ceil
 import kotlin.math.pow
@@ -132,7 +128,20 @@ fun maxDivisor(n: Int): Int = n / minDivisor(n)
  * Написать функцию, которая находит, сколько шагов требуется для
  * этого для какого-либо начального X > 0.
  */
-fun collatzSteps(x: Int): Int = TODO()
+fun collatzSteps(x: Int): Int {
+    var n = x
+    var a = 0
+    while (n != 1) {
+        if (n % 2 == 0) {
+            n /= 2
+            a++
+        } else {
+            n = 3 * n + 1
+            a++
+        }
+    }
+    return a
+}
 
 /**
  * Средняя (3 балла)
@@ -169,8 +178,7 @@ fun isCoPrime(m: Int, n: Int): Boolean {
             n1 -= m1
         }
     }
-    val x = n1 == 1
-    return x
+    return n1 == 1
 }
 
 /**
@@ -226,7 +234,7 @@ fun sin(x: Double, eps: Double): Double {
     var sin = x % (2 * Math.PI)
     val sinConst = sin
     var equation = sin
-    while (Math.abs(equation) >= eps) {
+    while (abs(equation) >= eps) {
         equation = -equation * sinConst / ((counter * 2 + 1) * (counter * 2)).toDouble() * sinConst
         counter += 1
         sin += equation
@@ -248,7 +256,7 @@ fun cos(x: Double, eps: Double): Double {
     var counter = 1
     var cos = 1.0
     val constX = x % (2 * Math.PI)
-    while (Math.abs(equation) >= eps) {
+    while (abs(equation) >= eps) {
         equation = -equation * constX / ((counter * 2 - 1) * (counter * 2)).toDouble() * constX
         counter += 1
         cos += equation
@@ -282,8 +290,8 @@ fun squareSequenceDigit(n: Int): Int {
         count = 1
         x++
     }
-    l = Math.abs(l)
-    m = m / pow(10.0, l * 1.0).toInt() % 10
+    l = abs(l)
+    m = m / 10.0.pow(l * 1.0).toInt() % 10
     return m
 }
 
@@ -303,7 +311,7 @@ fun fibSequenceDigit(n: Int): Int {
     var l = n
     var count = 1
     while (l > 0) {
-        m = ((Math.sqrt(5.0) / 5) * (pow((1 + Math.sqrt(5.0)) / 2, x) - pow((1 - Math.sqrt(5.0)) / 2, x))).toInt()
+        m = ((sqrt(5.0) / 5) * (((1 + sqrt(5.0)) / 2).pow(x) - ((1 - sqrt(5.0)) / 2).pow(x))).toInt()
         t = m
         while (t >= 10) {
             count++
@@ -313,7 +321,7 @@ fun fibSequenceDigit(n: Int): Int {
         count = 1
         x++
     }
-    l = Math.abs(l)
-    m = m / pow(10.0, l * 1.0).toInt() % 10
+    l = abs(/* a = */ l)
+    m = m / 10.0.pow(l * 1.0).toInt() % 10
     return m
 }

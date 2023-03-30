@@ -1,5 +1,3 @@
-@file:Suppress("UNUSED_PARAMETER", "UNREACHABLE_CODE")
-
 package lesson2.task1
 
 import lesson1.task1.discriminant
@@ -163,7 +161,7 @@ fun rookOrBishopThreatens(
  * Если такой треугольник не существует, вернуть -1.
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
-    if((a > b + c) || (b > a + c) || (c > b + a))
+    if ((a > b + c) || (b > a + c) || (c > b + a))
         return -1
     val max: Double
     val sum: Double
@@ -177,12 +175,12 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
         max = c * c
         sum = a * a + b * b
     }
-    if (max == sum)
-        return 1
+    return if (max == sum)
+        1
     else if (max < sum)
-        return 0
+        0
     else
-        return 2
+        2
 }
 
 /**
@@ -193,10 +191,13 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
  * Найти длину пересечения отрезков AB и CD.
  * Если пересечения нет, вернуть -1.
  */
-fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = when {
+fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
+    val i = when {
         (a > d || c > b) -> -1
-        (a <= d && d <= b && a <= c) -> d - c
+        (d in a..b && a <= c) -> d - c
         (c <= d && b <= d && a < c) -> b - c
         (c <= a && b <= d) -> b - a
         else -> d - a
     }
+    return i
+}
