@@ -3,6 +3,7 @@
 package lesson7.task1
 
 import java.io.File
+import java.io.PrintStream
 
 // Урок 7: работа с файлами
 // Урок интегральный, поэтому его задачи имеют сильно увеличенную стоимость
@@ -92,7 +93,19 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
  *
  */
 fun sibilants(inputName: String, outputName: String) {
-    TODO()
+    val vowels = mapOf("ы" to "и", "Ы" to "И", "я" to "а", "Я" to "А", "ю" to "у", "Ю" to "У")
+    val res = StringBuilder()
+    File(inputName).readLines().forEach() { line ->
+        val mistakes = Regex("""[жчшщ][ыяю]""", RegexOption.IGNORE_CASE).findAll(line)
+        var currentLine = line
+        for (i in mistakes) {
+            val i = i.range.last
+            val char = currentLine[i].toString()
+            currentLine = currentLine.replaceRange(i..i, vowels[char]!!)
+        }
+        res.appendLine(currentLine)
+    }
+    File(outputName).writeText(res.toString())
 }
 
 /**
@@ -113,7 +126,14 @@ fun sibilants(inputName: String, outputName: String) {
  *
  */
 fun centerFile(inputName: String, outputName: String) {
-    TODO()
+    val text = File(inputName).readText()
+    val maxLine = text.lines().maxOf { it.trim().length }
+    PrintStream(outputName).use { printStream ->
+        File(inputName).forEachLine { line ->
+            val currentLineLength = line.trim().length
+            printStream.println(" ".repeat((maxLine - currentLineLength) / 2) + line.trim())
+        }
+    }
 }
 
 /**
